@@ -1,0 +1,31 @@
+#app[data-v-7ba5bd90] {
+  text-align: center;
+  background: #ccc;
+}
+#app nav[data-v-7ba5bd90] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+#app nav a[data-v-7ba5bd90] {
+  display: block;
+  text-align: center;
+  font-size: 30px;
+  width: 30%;
+}
+
+h1[data-v-6b7a433b] {
+  color: #7fffd4;
+}
+
+h1[data-v-79bf9650] {
+  color: #00f;
+}
+
+h1[data-v-53634ed1] {
+  color: #d4c;
+}
+
