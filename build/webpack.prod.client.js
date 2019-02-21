@@ -1,9 +1,12 @@
 const path = require("path")
 const merge = require("webpack-merge")
+const WebpackAssetsManifest = require('webpack-assets-manifest')
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CleanWebpackPlugin = require("clean-webpack-plugin")
 const baseWebpackConfig = require("./webpack.base")
 const createOneOf = require("./util")
+
 const prodWebpackClientConfig = {
   mode:"production",
   entry: {
@@ -51,7 +54,9 @@ const prodWebpackClientConfig = {
       filename: "css/[name].[chunkhash:8].bundle.css",
       // 异步模块的默认文件名
       chunkFilename: "css/async.[name].[chunkhash:8].bundle.css"
-    })
+    }),
+    new CleanWebpackPlugin([path.resolve(__dirname,"../server/client")], { allowExternal: true }),
+    new WebpackAssetsManifest()
   ]
 }
 module.exports = merge(baseWebpackConfig,prodWebpackClientConfig)

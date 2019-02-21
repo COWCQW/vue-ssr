@@ -18,6 +18,7 @@ const webpackDevConfig = {
   devServer: {
     hot: true,
     open: true,
+    historyApiFallback:true,
     proxy: {},
   },
   module: {

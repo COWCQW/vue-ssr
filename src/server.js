@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
 import createRouter from "./router"
+import createEventBus from "./event"
 
 function createApp() {
+  Vue.prototype.$events = createEventBus(Vue)
   const router = createRouter()
   const app = new Vue({
     router,
@@ -10,19 +12,26 @@ function createApp() {
   })
   return app
 }
-export default context => {
+export default async context => {
 
-  return new Promise((resolve) => {
-    const app = createApp()
-    const url = context.url
-    app.$router.push(url)
-    // 获取相应路由下的组件
-    const matchedComponents = app.$router.getMatchedComponents()
+  const app = createApp()
+  const url = context.url
+  app.$router.push(url)
+  const matchedComponents = app.$router.getMatchedComponents()
 
-    // 如果没有组件，说明该路由不存在，报错404
-    if (!matchedComponents.length)
-      resolve(null)
-    else
-      resolve(app)
-  })
+  if (!matchedComponents.length)
+    return null
+  else {
+    await Promise.all(
+      matchedComponents.filter(com=>com.fetchdata)
+        .map(com=>com.fetchdata(app.$events,app.$router))  
+    )
+    return {
+      app:app,
+      state:app.$events._data
+    }
+  }
 }
+
+
+

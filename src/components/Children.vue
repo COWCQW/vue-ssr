@@ -9,9 +9,11 @@ export default {
   components:{
     Children
   },
-  data:{
+  data:function() {
+  return {
     parentDate:[1,2,3]
-  }
+  };
+}
   
 }
 </script>

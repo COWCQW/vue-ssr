@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config ./build/webpack.prod.client.js",
     "server": "webpack --config ./build/webpack.prod.server.js",
-    "start": "node ./server",
+    "start": "pm2 start ./server --watch",
     "dev": "webpack-dev-server --config ./build/webpack.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,17 +14,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "koa": "^2.7.0",
     "koa-static-server": "^1.4.0",
     "vue": "^2.5.22",
     "vue-router": "^3.0.2",
-    "vue-server-renderer": "^2.5.22"
+    "vue-server-renderer": "^2.5.22",
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "autoprefixer": "^9.4.7",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
+    "clean-webpack-plugin": "^1.0.1",
     "css-loader": "^2.1.0",
     "eslint": "^5.12.1",
     "eslint-loader": "^2.1.1",
@@ -42,6 +45,7 @@
     "vue-loader": "^15.6.2",
     "vue-template-compiler": "^2.5.22",
     "webpack": "^4.29.0",
+    "webpack-assets-manifest": "^3.1.1",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14",
     "webpack-merge": "^4.2.1"
